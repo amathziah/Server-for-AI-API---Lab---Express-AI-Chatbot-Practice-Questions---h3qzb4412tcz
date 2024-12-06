@@ -1,15 +1,16 @@
 const express = require("express");
-const dotenv = require("dotenv")
-const app = express();
+const dotenv = require("dotenv");
 const axios = require("axios");
+const app = express();
 const port = 3000;
 
-dotenv.config()
+dotenv.config();
 app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
+
 app.post('/api/gemini/prompt/send', async (req, res) => {
   const { prompt } = req.body;
 
@@ -25,17 +26,18 @@ app.post('/api/gemini/prompt/send', async (req, res) => {
       return res.status(500).json({ message: "Internal server error. Please try again later." });
   }
 });
+
 const generateContentFromGemini = async (prompt) => {
-  const apiKey = "AIzaSyAEjwFqomefefkQuZYyxf7bFexEzlKbY64"
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+  const apiKey = process.env.GEMINI_API_KEY;  // Use environment variable for API key
+  console.log(apiKey)
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`;
   
   try {
       const response = await axios.post(url, {
           contents: [{ parts: [{ text: prompt }] }]
       }, {
           headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${apiKey}`
+              'Content-Type': 'application/json'
           }
       });
 
@@ -49,4 +51,4 @@ app.listen(port, () => {
   console.log(`app listening on port ${port}`);
 });
 
-module.exports = {app}
+module.exports = { app };
