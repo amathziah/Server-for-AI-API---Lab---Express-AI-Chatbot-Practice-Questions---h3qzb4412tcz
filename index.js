@@ -29,7 +29,7 @@ app.post('/api/gemini/prompt/send', async (req, res) => {
 });
 
 const generateContentFromGemini = async (prompt) => {
-  const apiKey = process.env.GEMINI_API_KEY;  // Use environment variable for API key
+  const apiKey = "AIzaSyB7GVGJkepLN90YMbJ9sUxeUACBeO5wcvI";  // Use environment variable for API key
   console.log(apiKey)
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
   
