@@ -24,7 +24,7 @@ app.post('/api/gemini/prompt/send', async (req, res) => {
       return res.status(200).json({ response: aiResponse });
   } catch (error) {
       console.error("Error generating content:", error);
-      return res.status(200).json({ message: "Internal server error. Please try again later." });
+      return res.status(500).json({ message: "Internal server error. Please try again later." });
   }
 });
 
