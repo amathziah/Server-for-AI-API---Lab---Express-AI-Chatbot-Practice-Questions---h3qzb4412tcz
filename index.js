@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv")
 const app = express();
+const axios = require("axios");
 const port = 3000;
 
 dotenv.config()
@@ -25,8 +26,8 @@ app.post('/api/gemini/prompt/send', async (req, res) => {
   }
 });
 const generateContentFromGemini = async (prompt) => {
-  const apiKey = "AIzaSyBxdiY1bfiGR_5_xcZr99gUAubNDjkfAOs"
-  const url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
+  const apiKey = "AIzaSyAEjwFqomefefkQuZYyxf7bFexEzlKbY64"
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
   
   try {
       const response = await axios.post(url, {
