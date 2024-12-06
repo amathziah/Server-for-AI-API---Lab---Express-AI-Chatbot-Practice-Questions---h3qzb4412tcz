@@ -20,6 +20,7 @@ app.post('/api/gemini/prompt/send', async (req, res) => {
 
   try {
       const aiResponse = await generateContentFromGemini(prompt);
+      console.log(aiResponse)
       return res.status(200).json({ response: aiResponse });
   } catch (error) {
       console.error("Error generating content:", error);
@@ -41,7 +42,7 @@ const generateContentFromGemini = async (prompt) => {
           }
       });
 
-      return response.data; 
+      return response.data
   } catch (error) {
       throw new Error("Failed to call Gemini API");
   }
